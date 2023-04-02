@@ -1,0 +1,6 @@
+/target
+/Cargo.lock
+*.png
+*.jpg
+*.jpeg
+*.webp

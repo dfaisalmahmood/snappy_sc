@@ -1,0 +1,21 @@
+[package]
+name = "snappy_sc"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "test_app"
+path = "bin/test_app.rs"
+
+[dependencies]
+image = "0.23"
+webp = "0.2.2"
+rayon = "1.7.0"
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3.9", features = ["minwindef", "windef", "wingdi", "winuser"]}
+
+[target.'cfg(macos)'.dependencies]
+metal = "0.24.0"
