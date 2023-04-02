@@ -2,19 +2,18 @@ pub mod info;
 use std::{ops::DerefMut, time::Instant};
 
 use crate::{CaptureRegion, OutputFormat, ScreenshotOptions};
-use image::{ImageBuffer, Pixel, Rgba};
+use image::{ImageBuffer, Rgba};
 use rayon::prelude::*;
 use winapi::{
-    shared::windef::{DPI_AWARENESS_CONTEXT_SYSTEM_AWARE, HDC, HGDIOBJ, HMONITOR, HWND, RECT},
+    shared::windef::{DPI_AWARENESS_CONTEXT_SYSTEM_AWARE, HGDIOBJ, RECT},
     um::{
         wingdi::{
             BitBlt, CreateCompatibleBitmap, CreateCompatibleDC, DeleteDC, DeleteObject, GetDIBits,
             SelectObject, SRCCOPY,
         },
         winuser::{
-            EnumDisplayMonitors, GetDesktopWindow, GetForegroundWindow, GetMonitorInfoA,
-            GetSystemMetrics, GetWindowDC, GetWindowRect, MonitorFromWindow,
-            SetThreadDpiAwarenessContext, MONITORINFO, SM_CXSCREEN, SM_CYSCREEN,
+            GetDesktopWindow, GetSystemMetrics, GetWindowDC, SetThreadDpiAwarenessContext,
+            SM_CXSCREEN, SM_CYSCREEN,
         },
     },
 };
@@ -23,7 +22,7 @@ fn get_display_rect_by_id(display_id: i32) -> Option<RECT> {
     use winapi::{
         shared::{
             minwindef::LPARAM,
-            windef::{HDC, HMONITOR, RECT},
+            windef::{HDC, HMONITOR},
         },
         um::winuser::EnumDisplayMonitors,
     };
@@ -35,7 +34,7 @@ fn get_display_rect_by_id(display_id: i32) -> Option<RECT> {
     }
 
     unsafe extern "system" fn monitor_enum_proc(
-        hmonitor: HMONITOR,
+        _: HMONITOR,
         _: HDC,
         rect: *mut RECT,
         user_data: LPARAM,
@@ -78,7 +77,7 @@ pub fn take_screenshot(options: &ScreenshotOptions) -> Result<Vec<u8>, &'static 
     let hwnd = unsafe { GetDesktopWindow() };
     let hdc = unsafe { GetWindowDC(hwnd) };
 
-    let mut rect =
+    let rect =
         get_display_rect_by_id(options.display_id as i32).ok_or("Failed to get display rect")?;
 
     // unsafe { GetWindowRect(hwnd, &mut rect) };

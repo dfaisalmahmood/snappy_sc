@@ -1,4 +1,3 @@
-use std::ffi::c_void;
 use winapi::{
     shared::{
         minwindef::LPARAM,
@@ -11,7 +10,7 @@ use winapi::{
 };
 
 unsafe extern "system" fn monitor_enum_proc(
-    hmonitor: HMONITOR,
+    _: HMONITOR,
     _: HDC,
     _: *mut RECT,
     display_index: LPARAM,
@@ -35,7 +34,7 @@ pub fn get_focused_display_info() -> Option<(i32, u32, u32)> {
         );
 
         let mut display_index: i32 = -1;
-        let mut user_data = &mut display_index as *mut _ as LPARAM;
+        let user_data = &mut display_index as *mut _ as LPARAM;
 
         EnumDisplayMonitors(
             std::ptr::null_mut(),

@@ -1,5 +1,3 @@
-use winapi::shared::windef::HMONITOR;
-
 #[cfg(target_os = "windows")]
 pub mod windows;
 
