@@ -3,13 +3,12 @@ use std::fs::File;
 use std::io::Write;
 
 fn main() {
+    let (display_id, width, height) = snappy_sc::get_focused_display_info().unwrap();
     let options = ScreenshotOptions {
-        display_id: 0,
+        display_id,
         region: None,
         output_format: OutputFormat::Png,
     };
-
-    let (display_id, width, height) = snappy_sc::get_focused_display_info().unwrap();
     println!("DISPLAY: {}, {}, {}", display_id, width, height);
     match snappy_sc::take_screenshot(&options) {
         Ok(screenshot_data) => {

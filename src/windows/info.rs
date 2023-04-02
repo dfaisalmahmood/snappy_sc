@@ -20,7 +20,7 @@ unsafe extern "system" fn monitor_enum_proc(
     1
 }
 
-pub fn get_focused_display_info() -> Option<(i32, u32, u32)> {
+pub fn get_focused_display_info() -> Option<(u32, u32, u32)> {
     unsafe {
         SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
         let foreground_window = GetForegroundWindow();
@@ -53,6 +53,6 @@ pub fn get_focused_display_info() -> Option<(i32, u32, u32)> {
         let width = (monitor_info.rcMonitor.right - monitor_info.rcMonitor.left) as u32;
         let height = (monitor_info.rcMonitor.bottom - monitor_info.rcMonitor.top) as u32;
 
-        Some((display_index, width, height))
+        Some((display_index as u32, width, height))
     }
 }

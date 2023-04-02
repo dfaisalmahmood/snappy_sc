@@ -32,7 +32,7 @@ pub fn take_screenshot(options: &ScreenshotOptions) -> Result<Vec<u8>, &'static 
     // return macos::take_screenshot(options);
 }
 
-pub fn get_focused_display_info() -> Option<(i32, u32, u32)> {
+pub fn get_focused_display_info() -> Option<(u32, u32, u32)> {
     #[cfg(target_os = "windows")]
     return windows::info::get_focused_display_info();
 }
