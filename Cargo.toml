@@ -5,7 +5,7 @@ edition = "2021"
 license = "MIT"
 description = "A minimal crate to take screenshots created for Snappy"
 repository = "https://github.com/dfaisalmahmood/snappy_sc"
-keywords = ["screenshot", "screen capture", "graphics"]
+keywords = ["screenshot", "screen-capture", "graphics"]
 readme = "README.md"
 exclude = ["bin/*"]
 
