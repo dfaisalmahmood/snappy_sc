@@ -15,7 +15,7 @@ exclude = [
 
 [[bin]]
 name = "test_app"
-path = "bin/test_app.rs"
+path = "./bin/test_app.rs"
 
 [dependencies]
 image = "0.23"

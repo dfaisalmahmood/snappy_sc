@@ -1,5 +1,3 @@
-use std::fs::File;
-
 #[cfg(target_os = "windows")]
 pub mod windows;
 
