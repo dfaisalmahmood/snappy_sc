@@ -7,15 +7,13 @@ description = "A minimal crate to take screenshots created for Snappy"
 repository = "https://github.com/dfaisalmahmood/snappy_sc"
 keywords = ["screenshot", "screen capture", "graphics"]
 readme = "README.md"
-exclude = [
-  "bin/*"
-]
+exclude = ["bin/*"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[[bin]]
-name = "test_app"
-path = "./bin/test_app.rs"
+# [[bin]]
+# name = "test_app"
+# path = "bin/test_app.rs"
 
 [dependencies]
 image = "0.23"
