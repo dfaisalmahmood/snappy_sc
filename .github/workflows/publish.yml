@@ -1,0 +1,42 @@
+name: Publish to crates.io
+
+on:
+  push:
+    tags:
+      - "v*" # Trigger when a new tag is pushed
+
+jobs:
+  build_and_publish:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          default: true
+          components: clippy, rustfmt
+          target: x86_64-pc-windows-msvc
+
+      - name: Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --all-features
+
+      # - name: Test
+      #   uses: actions-rs/cargo@v1
+      #   with:
+      #     command: test
+      #     args: --all-features
+
+      - name: Publish to crates.io
+        uses: actions-rs/cargo@v1
+        with:
+          command: publish
+          args: --token ${{ secrets.CRATES_IO_TOKEN }}
+        env:
+          CARGO_TERM_COLOR: always
