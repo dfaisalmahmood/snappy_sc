@@ -2,6 +2,11 @@
 name = "snappy_sc"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "A minimal crate to take screenshots created for Snappy"
+repository = "https://github.com/dfaisalmahmood/snappy_sc"
+keywords = ["screenshot", "screen capture", "graphics"]
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
